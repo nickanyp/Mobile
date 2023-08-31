@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-import GameScreen from "./GameScreen";
 
 const StartGameScreen = (props) => {
   return (
@@ -9,10 +8,9 @@ const StartGameScreen = (props) => {
       <Button
         title="START GAME"
         onPress={() => {
-          // ...เพิ่มโค้ด...
           var rndNum = Math.floor(Math.random() * 100);
           console.log(rndNum);
-          props.onStartGame(rndNum);
+          props.onStartGame(rndNum); //ทำการกำหนดค่าเลขโจทย์ให้กับ correctNumber ใน App ด้วยการเรียกผ่าน props 
         }}
       />
     </View>

@@ -7,7 +7,6 @@ import StartGameScreen from "./screens/StartGameScreen";
 
 export default function App() {
 
-
   //correctNumber ใช้เก็บตัวเลขที่เป็นโจทย์ของโปรแกรม โดยกำหนดค่าเริ่มต้นเป็น 0 และอัพเดทค่า state ด้วยฟังก์ชัน setCorrectNumber
   const [correctNumber, setCorrectNumber] = useState(0);
   //guessRound ใช้เก็บจำนวนรอบที่ผู้เล่นเดาตัวเลข โปรแกรม โดยกำหนดค่าเริ่มต้นเป็น 0 และอัพเดทค่า state ด้วยฟังก์ชัน setGuessRounds
@@ -15,12 +14,9 @@ export default function App() {
 
   // ฟังก์ชันสำหรับการเริ่มเกมใหม่
   const configureNewGameHandler = () => {
-    //...เพิ่มโค้ด...อัพเดทค่าสเตท guessRounds ให้เป็น 0
-    //...เพิ่มโค้ด...อัพเดทค่าสเตท correctNumber ให้เป็น 0
-    setCorrectNumber(0);
-    setGuessRounds(0);
+    setCorrectNumber(0); //อัพเดทค่าสเตท guessRounds ให้เป็น 0
+    setGuessRounds(0); //อัพเดทค่าสเตท correctNumber ให้เป็น 0
   };
-
 
   const startGameHandler = (number) => {
     setCorrectNumber(number);
@@ -31,8 +27,8 @@ export default function App() {
     setGuessRounds(numOfRounds);
   };
 
+  //กำหนดให้มี property ชื่อ onStartGame ซึ่งจะส่งฟังก์ชัน startGameHandler ซึ่งทำหน้าที่กำหนดค่าเลขโจทย์ของโปรแกรมให้กับสเตท correctNumber
   let content = <StartGameScreen answer={correctNumber} onStartGame={startGameHandler} />;
-
 
   if (correctNumber > 0 && guessRounds <= 0) {
       content = (

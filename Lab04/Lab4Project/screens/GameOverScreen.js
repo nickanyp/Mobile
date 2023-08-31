@@ -13,7 +13,6 @@ const GameOverScreen = (props) => {
           props.onReStart()
         }}
       />
-
     </View>
   );
 };
