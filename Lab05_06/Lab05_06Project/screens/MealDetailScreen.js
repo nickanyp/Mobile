@@ -4,10 +4,7 @@ import { MEALS } from "../data/dummy-data";
 import MealItem from "../components/Mealtem";
 
 const MealDetailScreen = ({navigation, route}) => {
-  // เขียนโค้ดเพิ่ม เพื่อดึงข้อมูลเกี่ยวกับเมนูอาหารที่ผู้ใช้เลือกเอาไว้
   const {title,steps} = route.params;
-
-
   return (
     <View style={styles.screen}>
       <Text>Dish:{" "}{title}</Text>

@@ -1,0 +1,57 @@
+npx create-expo-app AwesomeProject
+cd AwesomeProject
+npx start expo
+
+Stack
+npm install @react-navigation/native
+npm install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+
+Tab
+npm install --save @react-navigation/bottom-tabs
+
+Drawer
+npm install @react-navigation/drawer
+npm install react-native-gesture-handler
+npm install react-native-reanimated
+
+TabBarIcon
+npm install @expo/vector-icons
+
+- Props : ส่งค่าจาก parent ไป child component
+
+- State : ข้อมูลที่เก้บอยู่ใน component
+
+- ส่งฟังก์ชันผ่าน props เมื่อมีการเรียก component ลูก (ลูก->แม่):
+    <StartGameScreen answer={correctNumber} onStartGame={startGameHandler} />;
+
+- กำหนดค่า stage : setGuessRounds(numOfRounds);
+
+- เรียกใช้ค่า stage :
+    state = { name: ‘James’ , gender: ‘male }
+    this.state.name
+    this.state.gender
+
+- กำหนดค่าใหม่ใน stage :
+    this.setStage( {name: ‘Jane’, gender: ‘female’} )
+
+- แสดงค่าใน stage : 
+Hungry: {hungryNum} Full: {fullNum}
+
+- StackNavigation : การเปลี่ยนไปยังหน้าจออื่น Stack navigator จะทำการ push 
+หน้าจอใหม่เข้าไป ใน Navigation stack (อยู่ที่ส่วน top ของ stack)
+
+- Navigate ระหว่างหน้าจอ : 
+    navigation.navigate(RouteName)
+
+- รับ parameter ผ่าน params : 
+    const {prev, id} = route.params;
+
+- ส่ง Parameter ผ่าน Routes (ส่ง Parameter ให้กับ Screen หน้าถัดไป) :  
+    navigation.navigate('S2', {prev: 'S1', id: 1})
+
+- การปรับ Header ตามข้อมูลที่ได้รับจากหน้าจอก่อนหน้า : 
+    options={ 
+        ({ route }) => ({
+            title: "ID-" + route.params.id.toString(), 
+    }) } /> 

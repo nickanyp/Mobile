@@ -151,5 +151,5 @@ export default function MyNavigator() {
 // • options : ใช้กำหนดรายละเอียดเกี่ยวกับการแสดงผลของหน้าจอนั้นๆ
 
 // Navigator จะประกอบด้วย Screen อยู่ภายใน ใช้กำหนดค่าสำหรับควบคุมการทำ navigation มี prop ที่สำคัญ เช่น
-// • initialRouteName : ใช้กำหนดเส้นทางเริ่มต้นของการท า Navigation
+// • initialRouteName : ใช้กำหนดเส้นทางเริ่มต้นของการทำ Navigation
 // • screenOptions : ใช้กำหนดรายละเอียดการแสดงผลโดยรวมของ Screen ที่ Navigator ดูแลทั้งหมด
