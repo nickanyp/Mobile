@@ -7,16 +7,27 @@ import FavoritesScreen from "../screens/FavoritesScreen";
 import FiltersScreen from "../screens/FiltersScreen";
 
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from 'react-redux'
+import { toggleFavorite } from "../store/actions/mealsActions";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { HeaderButton, HeaderButtons, Item } from "react-navigation-header-buttons";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+const StarHeaderButton = (props) => (
+    <HeaderButton
+      {...props}
+      IconComponent={Ionicons}
+      iconSize={23}
+      color={"white"}
+    ></HeaderButton>
+  )
 
 //1
 function MealsFavTabNavigator() {
@@ -27,11 +38,11 @@ function MealsFavTabNavigator() {
         component={MealsNavigator}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <Ionicons name="ios-restaurant" size={size} color={color}/>;
+            return <Ionicons name="ios-restaurant" size={size} color={color} />;
           },
           headerShown: false,
           tabBarActiveTintColor: "orange",
-          tabBarInactiveTintColor: "gray"
+          tabBarInactiveTintColor: "gray",
         }}
       ></Tab.Screen>
       <Tab.Screen
@@ -43,7 +54,7 @@ function MealsFavTabNavigator() {
           },
           headerShown: false,
           tabBarActiveTintColor: "orange",
-          tabBarInactiveTintColor: "gray"
+          tabBarInactiveTintColor: "gray",
         }}
       ></Tab.Screen>
     </Tab.Navigator>
@@ -52,6 +63,10 @@ function MealsFavTabNavigator() {
 
 //1.1
 function MealsNavigator() {
+  const dispatch = useDispatch(); 
+  const toggleFavoriteHandler = (mealId) => {
+    dispatch(toggleFavorite(mealId));
+   };
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -79,6 +94,11 @@ function MealsNavigator() {
           title: route.params.title,
           headerStyle: { backgroundColor: "#4a148c" },
           headerTintColor: "white",
+          headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={ StarHeaderButton }>
+              <Item title="MealDetail" iconName="ios-star" onPress={() => toggleFavoriteHandler(route.params.id)}></Item>
+            </HeaderButtons>
+          )
         })}
       ></Stack.Screen>
     </Stack.Navigator>
@@ -89,13 +109,13 @@ function MealsNavigator() {
 function FavNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-      name="Your Favorites" 
-      component={FavoritesScreen}
-      options={{
-        headerStyle: { backgroundColor: "#4a148c" },
-        headerTintColor: "white",
-      }}
+      <Stack.Screen
+        name="Your Favorites"
+        component={FavoritesScreen}
+        options={{
+          headerStyle: { backgroundColor: "#4a148c" },
+          headerTintColor: "white",
+        }}
       ></Stack.Screen>
       <Stack.Screen
         name="MealDetail"
@@ -109,7 +129,9 @@ function FavNavigator() {
 function FiltersNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Filter Meals" component={FiltersScreen}
+      <Stack.Screen
+        name="Filter Meals"
+        component={FiltersScreen}
         options={{
           headerStyle: { backgroundColor: "#4a148c" },
           headerTintColor: "white",
@@ -120,10 +142,15 @@ function FiltersNavigator() {
 }
 
 // สร้าง Navigator หลัก
-export default function MyNavigator() {
+export default function MealNavigator() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator screenOptions={{drawerActiveTintColor: "orange", drawerInactiveTintColor: "gray"}}>
+      <Drawer.Navigator
+        screenOptions={{
+          drawerActiveTintColor: "orange",
+          drawerInactiveTintColor: "gray",
+        }}
+      >
         <Drawer.Screen
           name="MealsFav"
           component={MealsFavTabNavigator}
@@ -134,7 +161,7 @@ export default function MyNavigator() {
         ></Drawer.Screen>
         <Drawer.Screen
           name="Filters"
-          component={FiltersNavigator}
+          component={FiltersNavigator}S
           options={{
             drawerLabel: "Filters",
             headerShown: false,
